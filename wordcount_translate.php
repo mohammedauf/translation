@@ -391,6 +391,12 @@ class WordCountTranslation{
     }
 
     public function countPdfWords($file){
+        include plugin_dir_path( __FILE__ ). 'pdf' . '/vendor/autoload.php';
+        // Parse pdf file and build necessary objects.
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf    = $parser->parseFile($file);
+        $text = $pdf->getText();
+        return str_word_count($text);
 
     }
     public function countTxtWords($file){
